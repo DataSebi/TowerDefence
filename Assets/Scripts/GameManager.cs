@@ -7,28 +7,27 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int ressources;
+    private int gold;
     private BuildSocket currentBuildSocketSelected;
 
-    public TextMeshProUGUI ressourceText;
+    public TextMeshProUGUI goldText;
     public GameObject buildScreen;
     private Button buildButton;
 
     void Start()
     {
         buildButton = buildScreen.GetComponentInChildren<Button>();
-        ressources = 0;
-        StartCoroutine(AddResources());
+        gold = 0;
+        StartCoroutine(AddGold());
     }
 
-    private IEnumerator AddResources()
+    private IEnumerator AddGold()
     {
         while (true)
         {
             yield return new WaitForSeconds(1.0f);
-            ressources += 1;
-            ressourceText.text = "Ressources: " + ressources;
-            Debug.Log(ressources);
+            gold += 1;
+            goldText.text = "Gold: " + gold;
         }
     }
 
@@ -42,12 +41,13 @@ public class GameManager : MonoBehaviour
 
     public void BuildTurret()
     {
-        if (currentBuildSocketSelected.price <= ressources)
+        if (currentBuildSocketSelected.price <= gold)
         {
             Instantiate(currentBuildSocketSelected.turret, currentBuildSocketSelected.transform.position, currentBuildSocketSelected.transform.rotation);
             //gameObject.SetActive(false);
             buildScreen.SetActive(false);
-            ressources -= currentBuildSocketSelected.price;
+            gold -= currentBuildSocketSelected.price;
+            goldText.text = "Gold: " + gold;
         }
 
     }
