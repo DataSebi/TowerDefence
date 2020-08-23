@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private int gold;
+    private int health;
     private BuildSocket currentBuildSocketSelected;
 
     public TextMeshProUGUI goldText;
+    public TextMeshProUGUI healthText;
     public GameObject buildScreen;
     private Button buildButton;
 
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     {
         buildButton = buildScreen.GetComponentInChildren<Button>();
         gold = 0;
+        health = 3;
+        healthText.text = "Health: " + health;
         StartCoroutine(AddGold());
     }
 
