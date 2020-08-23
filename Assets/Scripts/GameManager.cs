@@ -11,18 +11,22 @@ public class GameManager : MonoBehaviour
     private int health;
     private BuildSocket currentBuildSocketSelected;
 
+    public GameObject enemy;
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI healthText;
     public GameObject buildScreen;
     private Button buildButton;
+
+    public List<GameObject> waypoints;
 
     void Start()
     {
         buildButton = buildScreen.GetComponentInChildren<Button>();
         gold = 0;
         health = 3;
-        healthText.text = "Health: " + health;
+        UpdateHealthText();
         StartCoroutine(AddGold());
+        Instantiate(enemy);
     }
 
     private IEnumerator AddGold()
@@ -61,6 +65,20 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoseHealth()
+    {
+        health -= 1;
+        if (health == 0) 
+        {
+            Debug.Log("GAME OVER");
+        }
+        UpdateHealthText();
+    }
+
+    private void UpdateHealthText()
+    {
+        healthText.text = "Health: " + health;
+    }
     // Update is called once per frame
     void Update()
     {
