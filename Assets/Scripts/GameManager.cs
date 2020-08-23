@@ -37,8 +37,13 @@ public class GameManager : MonoBehaviour
 
     public void SelectBuildSocket(BuildSocket turretSocket)
     {
+        if (currentBuildSocketSelected != null)
+        {
+            currentBuildSocketSelected.selectMarker.SetActive(false);
+        }
         //active Build Screen
         currentBuildSocketSelected = turretSocket;
+        currentBuildSocketSelected.selectMarker.SetActive(true);
         buildScreen.SetActive(true);
         buildButton.onClick.AddListener(BuildTurret);
     }

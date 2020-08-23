@@ -6,6 +6,7 @@ public class BuildSocket : MonoBehaviour
 {
     public GameObject turret;
     private GameManager gameManger;
+    public GameObject selectMarker;
     
     [HideInInspector] public int price;
 
